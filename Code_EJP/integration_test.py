@@ -20,11 +20,14 @@ NORMAL_CASES = [
     ("legal",   "임대차 계약 만료 후 집주인이 보증금을 돌려주지 않으면 어떻게 하나요?"),
 ]
 
-# 의도적으로 불완전한 질문 — 재시도 루프 작동 확인용
+# 형식상 완전하지만 루브릭 누락을 유발하기 쉬운 질문 — 재시도 루프 작동 확인용
+# · admin  : 절차 대신 '분위기'를 묻는 질문 → 법령 조문·서류명·처리기관·기간(A1-A5) 누락 유도
+# · finance: 정성적 판단을 구하는 질문 → 수치·단위·가정·리스크 경고(F1-F5) 누락 유도
+# · legal  : 직접 조언을 구하는 질문 → 면책 고지·법령 인용·전문가 권고(G1-G4) 누락 유도
 RETRY_CASES = [
-    ("admin",   "신고요?"),
-    ("finance", "돈"),
-    ("legal",   "법이요?"),
+    ("admin",   "식품 창업을 준비 중인데, 전반적으로 어떤 마음가짐으로 행정 절차에 임하면 좋을까요?"),
+    ("finance", "소규모 카페 창업이 현실적으로 수익을 낼 수 있는 사업인지 솔직한 의견을 들려주세요."),
+    ("legal",   "임대차 계약 만료 시 세입자 입장에서 가장 유리하게 대처하는 방법을 알려주세요."),
 ]
 
 
@@ -79,10 +82,10 @@ async def main():
     if mode == "normal":
         await run_suite(NORMAL_CASES, "[ 정상 경로 — 충분한 질문 ]")
     elif mode == "retry":
-        await run_suite(RETRY_CASES, "[ 재시도 경로 — 불완전한 질문 ]")
+        await run_suite(RETRY_CASES, "[ 재시도 경로 — 루브릭 누락 유발 질문 ]")
     else:
         await run_suite(NORMAL_CASES, "[ 정상 경로 — 충분한 질문 ]")
-        await run_suite(RETRY_CASES, "[ 재시도 경로 — 불완전한 질문 ]")
+        await run_suite(RETRY_CASES, "[ 재시도 경로 — 루브릭 누락 유발 질문 ]")
 
 
 if __name__ == "__main__":

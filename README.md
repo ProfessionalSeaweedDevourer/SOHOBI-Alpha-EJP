@@ -323,6 +323,13 @@ python integration_test.py all
 | 2026-03-09 | — | Orchestrator 내 `approved=false`이나 `issues` 없는 엣지케이스 강제 승인 처리 추가 | `orchestrator.py` |
 | 2026-03-09 | — | Sign-off 평가 루브릭 C3(내부 일관성) 기준 명확화: 직접 모순에 한정, 입장 차이 제외 | `prompts/signoff_*/evaluate/skprompt.txt` |
 | 2026-03-09 | — | Sign-off 평가 루브릭 C5(할루시네이션) 기준 명확화: 단정적 허위 진술에 한정 | `prompts/signoff_*/evaluate/skprompt.txt` |
+| 2026-03-10 | — | Sign-off 루브릭 C2: 짧은 완결 응답 통과 예시 추가 (false positive 억제) | `prompts/signoff_*/evaluate/skprompt.txt` |
+| 2026-03-10 | — | Sign-off 루브릭 C3: "의심만으로 issues 금지" 명시 추가 (내부 재시도 반복 억제) | `prompts/signoff_*/evaluate/skprompt.txt` |
+| 2026-03-10 | — | Sign-off 루브릭 F5: 리스크 부정·축소 표현 경고 불인정 조건 추가 (`'원금 손실 없이'` false pass 차단) | `prompts/signoff_finance/evaluate/skprompt.txt` |
+| 2026-03-10 | — | Sign-off 루브릭 G1·G2: 부재 판별 예시 추가 (미발동 방지) | `prompts/signoff_legal/evaluate/skprompt.txt` |
+| 2026-03-10 | — | Sign-off 루브릭 G4: 통과 예시 추가 (false negative 방지) | `prompts/signoff_legal/evaluate/skprompt.txt` |
+| 2026-03-10 | — | `MOCK_DRAFTS['finance']` 수정: `'원금 손실 없이'` → `'반드시 안정적인 수익'` (C5 트리거, F5 명백 부재) | `step3_domain_signoff.py` |
+| 2026-03-10 | — | `integration_test.py` 에스컬레이션 경로 재설계: 서브-에이전트 대신 고정 실패 draft를 Sign-off에 직접 반복 투입 | `integration_test.py` |
 
 ---
 

@@ -47,7 +47,7 @@ class AdminAgent:
         history.add_user_message(question)
 
         from semantic_kernel.connectors.ai.open_ai import OpenAIChatPromptExecutionSettings
-        settings = OpenAIChatPromptExecutionSettings(temperature=0.3)
+        settings = OpenAIChatPromptExecutionSettings()
 
         response = await service.get_chat_message_content(history, settings=settings)
         return str(response)
